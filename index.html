@@ -187,16 +187,41 @@
       padding: 20px 0;
     }
 
+    hr {
+      width: 100%;
+      border: none;
+      border-top: 1px solid hsl(0, 0%, 90%);
+    }
+
     @media screen and (max-width: 650px) {
+      
       main {
         width: 375px;
         height: 815px;
       }
+
       .faq-card {
         width: 87%;
         height: 65%;
       }
-    }
+
+      .accordion-title {
+        font-size: 16px;  
+      }
+
+      .faq-accordion-trigger {
+        gap: 10px;
+      }
+
+      .faq-accordion-content[aria-hidden="false"]>p {
+        padding: 5px 0;
+        font-size: 14px;
+      }
+
+      .faq-accordion-panel:has([aria-expanded="true"]) {
+        flex-basis: calc(var(--_button-size)*4);
+      }
+  }
 
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
