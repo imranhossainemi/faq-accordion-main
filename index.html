@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | FAQ accordion</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    /* Custom styles */
+    :root {
+      --white: hsl(0, 0%, 100%);
+      --light-pink: hsl(275, 100%, 97%);
+      --grayish-purple: hsl(292, 16%, 49%);
+      --dark-purple: hsl(292, 42%, 14%);
+    }
+
+    @font-face {
+      font-family: 'Work Sans';
+      font-weight: 400 600 700;
+      src: url('./assets/fonts/WorkSans-VariableFont_wght.ttf') format('truetype');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: nowrap;
+    }
+
+    p, h2, h3 {
+      font-family: 'Work Sans', sans-serif;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--grayish-purple);
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--dark-purple);
+    }
+
+    .accordion-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark-purple);
+    }
+
+    main {
+      width: 1440px;
+      height: 900px;
+    }
+
+   
+
+    .faq-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .faq-bg-top {
+      width: 100%;
+      height: 36%;
+      background-color: var(--dark-purple);
+    }
+
+    .faq-bg-pattern {
+      background-position: center;
+    }
+
+    .faq-bg-bottom {
+      width: 100%;
+      height: 64%;
+      background-color: var(--light-pink);
+    }
+
+    .faq-card {
+      position: absolute;
+      width: 42%;
+      height: 63%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: start;
+      flex-direction: column;
+      background-color: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+    }
+
+    .faq-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .faq-title-icon {
+      width: 34px;
+      height: 34px;
+    }
+
+    .faq-accordions {
+      --_button-size: 40px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .faq-accordion-panel {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-basis: calc(var(--_button-size));
+      overflow: hidden;
+    }
+
+    .faq-accordion-panel:has([aria-expanded="true"]) {
+      flex-basis: calc(var(--_button-size)*3);
+    }
+
+    .faq-accordion-trigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 20px;
+      border: none;
+      background-color: var(--white);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .faq-accordion-trigger:hover>.accordion-title {
+      color: hsl(283, 68%, 43%);
+    }
+
+    .faq-accordion-trigger[aria-expanded="true"]>.icon-plus {
+      display: none;
+    }
+
+    .faq-accordion-trigger[aria-expanded="true"]>.icon-minus {
+      display: block;
+    }
+
+    .faq-accordion-trigger[aria-expanded="false"]>.icon-plus {
+      display: block;
+    }
+
+    .faq-accordion-trigger[aria-expanded="false"]>.icon-minus {
+      display: none;
+    }
+
+    .faq-accordion-content {
+      width: 100%;
+    }
+
+    .faq-accordion-content>p {
+      display: none;
+    }
+
+    .faq-accordion-content[aria-hidden="false"]>p {
+      display: block;
+      padding: 20px 0;
+    }
+
+    @media screen and (max-width: 650px) {
+      main {
+        width: 375px;
+        height: 815px;
+      }
+      .faq-card {
+        width: 87%;
+        height: 65%;
+      }
+    }
+
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="faq-container">
+      <div class="faq-bg-top">
+        <picture>
+          <source srcset="./assets/images/background-pattern-mobile.svg" media="(max-width: 600px)">
+          <img src="./assets/images/background-pattern-desktop.svg" alt="background pattern" class="faq-bg-pattern">
+        </picture>
+      </div>
+      <div class="faq-card">
+        <h2 class="faq-title">
+          <img src="./assets/images/icon-star.svg" alt="icon star" class="faq-title-icon">
+          FAQs
+        </h2>
+        <div class="faq-accordions">
+          <div class="faq-accordion-panel">
+            <h3 id="panel1-heading">
+              <button
+                class="faq-accordion-trigger"
+                aria-controls="panel1-content"
+                aria-expanded="true"
+              >
+                <span class="accordion-title" id="panel1-title">
+                  What is Frontend Mentor, and how will it help me?
+                </span>
+                <img src="./assets/images/icon-plus.svg" alt="icon plus" class="icon-plus">
+                <img src="./assets/images/icon-minus.svg" alt="icon minus" class="icon-minus">
+              </button>
+            </h3>
+            <div
+              id="panel1-content"
+              class="faq-accordion-content"
+              aria-labelledby="panel1-heading"
+              role="region"
+              aria-hidden="false"
+            >
+              <p>
+                Frontend Mentor offers realistic coding challenges to help developers improve their 
+                frontend coding skills with projects in HTML, CSS, and JavaScript. It's suitable for 
+                all levels and ideal for portfolio building.
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-accordion-panel">
+            <h3 id="panel2-heading">
+              <button
+                class="faq-accordion-trigger"
+                aria-controls="panel2-content"
+                aria-expanded="false"
+              >
+                <span class="accordion-title" id="panel2-title">
+                  Is Frontend Mentor free?
+                </span>
+                <img src="./assets/images/icon-plus.svg" alt="icon plus" class="icon-plus">
+                <img src="./assets/images/icon-minus.svg" alt="icon minus" class="icon-minus">
+              </button>
+            </h3>
+            <div
+              id="panel2-content"
+              class="faq-accordion-content"
+              aria-labelledby="panel2-heading"
+              role="region"
+              aria-hidden="true"
+            >
+              <p>
+                Yes, Frontend Mentor offers both free and premium coding challenges, with the free 
+                option providing access to a range of projects suitable for all skill levels.
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-accordion-panel">
+            <h3 id="panel3-heading">
+              <button
+                class="faq-accordion-trigger"
+                aria-controls="panel3-content"
+                aria-expanded="false"
+              >
+                <span class="accordion-title" id="panel3-title">
+                  Can I use Frontend Mentor projects in my portfolio?
+                </span>
+                <img src="./assets/images/icon-plus.svg" alt="icon plus" class="icon-plus">
+                <img src="./assets/images/icon-minus.svg" alt="icon minus" class="icon-minus">
+              </button>
+            </h3>
+            <div
+              id="panel3-content"
+              class="faq-accordion-content"
+              aria-labelledby="panel3-heading"
+              role="region"
+              aria-hidden="true"
+            >
+              <p>
+                Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent
+                way to showcase your skills to potential employers!
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="faq-accordion-panel">
+            <h3 id="panel4-heading">
+              <button
+                class="faq-accordion-trigger"
+                aria-controls="panel4-content"
+                aria-expanded="false"
+              >
+                <span class="accordion-title" id="panel4-title">
+                  How can I get help if I'm stuck on a Frontend Mentor challenge?
+                </span>
+                <img src="./assets/images/icon-plus.svg" alt="icon plus" class="icon-plus">
+                <img src="./assets/images/icon-minus.svg" alt="icon minus" class="icon-minus">
+              </button>
+            </h3>
+            <div
+              id="panel4-content"
+              class="faq-accordion-content"
+              aria-labelledby="panel4-heading"
+              role="region"
+              aria-hidden="true"
+            >
+              <p>
+                The best place to get help is inside Frontend Mentor's Discord community. There's a help 
+                channel where you can ask questions and seek support from other community members.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-bg-bottom"></div>
+    </div>
+  </main>
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </footer>
+
+  <script>
+    const accordion = document.querySelector('.faq-accordions');
+
+    accordion.addEventListener('click', (e) => {
+      const activePanel = e.target.closest('.faq-accordion-panel');
+      if (!activePanel) return;
+      toggleAccordion(activePanel);
+    });
+
+    function toggleAccordion(panelToActivate) {
+      const buttons = document.querySelectorAll('.faq-accordion-trigger');
+      const contents = panelToActivate.parentElement.querySelectorAll('.faq-accordion-content');
+
+      buttons.forEach((button) => {
+          button.setAttribute('aria-expanded', 'false');
+      });
+
+      contents.forEach((content) => {
+          content.setAttribute('aria-hidden', 'true');
+      });
+
+      panelToActivate.querySelector('.faq-accordion-trigger').setAttribute('aria-expanded', 'true');
+
+      panelToActivate.querySelector('.faq-accordion-content').setAttribute('aria-hidden', 'false');
+    }
+
+  </script>
+</body>
+</html>
